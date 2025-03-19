@@ -5,19 +5,54 @@
         static void Main(string[] args)
         {
             Random numberGenerator = new Random();
+            const int endLine = 30;
 
             do
             {
-                Header();
-                Console.Write("Pressione [Enter] para lançar o dado...");
-                Console.ReadKey();
+                int playerPosition = 0;
+                bool onGoing = true;
 
-                int result = numberGenerator.Next(1, 7);
+                do
+                {
+                    Header();
+                    Console.Write("Pressione [Enter] para lançar o dado...");
+                    Console.ReadKey();
 
-                Header();
-                Console.WriteLine("/==--==--==--==--==--==--==\\");
-                Console.WriteLine($"  O dado caiu no número: {result}");
-                Console.WriteLine("\\==--==--==--==--==--==--==/\n");
+                    int result = numberGenerator.Next(1, 7);
+
+                    Header();
+                    Console.WriteLine("/==--==--==--==--==--==--==\\");
+                    Console.WriteLine($"  O dado caiu no número: {result}");
+                    Console.WriteLine("\\==--==--==--==--==--==--==/\n");
+
+                    playerPosition += result;
+                    if (playerPosition >= endLine)
+                    {
+                        onGoing = false;
+
+                        Header();
+                        Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
+                        Console.WriteLine($" Você alcançou a casa {playerPosition} e ultrapassou a linha de chegada!!");
+                        Console.WriteLine(" Parabéns!!!");
+                        Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
+                    }
+                    else if (playerPosition <= 9)
+                    {
+                        Console.WriteLine("/==--==--==--==--==--==--==--==\\");
+                        Console.WriteLine($"   Você está na casa {playerPosition} de {endLine}!!");
+                        Console.WriteLine("\\==--==--==--==--==--==--==--==/\n");
+                        Console.Write("Pressione [Enter] para lançar o dado...");
+                        Console.ReadKey();
+                    }
+                    else
+                    {
+                        Console.WriteLine("/==--==--==--==--==--==--==--==\\");
+                        Console.WriteLine($"  Você está na casa {playerPosition} de {endLine}!!");
+                        Console.WriteLine("\\==--==--==--==--==--==--==--==/\n");
+                        Console.Write("Pressione [Enter] para lançar o dado...");
+                        Console.ReadKey();
+                    }
+                } while (onGoing);
 
                 Console.Write("Deseja continuar? (S/N) ");
                 string optionContinue = Console.ReadLine()!.ToUpper();
