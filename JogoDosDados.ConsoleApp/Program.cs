@@ -19,13 +19,28 @@
                     Console.ReadKey();
 
                     int result = numberGenerator.Next(1, 7);
+                    playerPosition += result;
 
                     Header();
                     Console.WriteLine("/==--==--==--==--==--==--==\\");
                     Console.WriteLine($"  O dado caiu no número: {result}");
                     Console.WriteLine("\\==--==--==--==--==--==--==/\n");
 
-                    playerPosition += result;
+                    if (playerPosition == 5 || playerPosition == 10 || playerPosition == 15 || playerPosition == 25)
+                    {
+                        Console.WriteLine("/==--==--==--==--==--==--==--==--==\\");
+                        Console.WriteLine($"  Caiu na casa de sorte {playerPosition}!!\n  Avanço extra de 3 casas!");
+                        Console.WriteLine("/==--==--==--==--==--==--==--==--==\\\n");
+                        playerPosition += 3;
+                    }
+                    else if (playerPosition == 7 || playerPosition == 13 || playerPosition == 20)
+                    {
+                        Console.WriteLine("/==--==--==--==--==--==--==--==\\");
+                        Console.WriteLine($"  Que azar! Caiu na casa {playerPosition}..\n  Recuo de 2 casas =/");
+                        Console.WriteLine("/==--==--==--==--==--==--==--==\\\n");
+                        playerPosition -= 2;
+                    }
+
                     if (playerPosition >= endLine)
                     {
                         onGoing = false;
@@ -36,7 +51,8 @@
                         Console.WriteLine(" Parabéns!!!");
                         Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
                     }
-                    else if (playerPosition <= 9)
+                    else 
+                    if (playerPosition <= 9)
                     {
                         Console.WriteLine("/==--==--==--==--==--==--==--==\\");
                         Console.WriteLine($"   Você está na casa {playerPosition} de {endLine}!!");
