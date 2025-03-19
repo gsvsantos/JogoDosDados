@@ -51,8 +51,7 @@
                         Console.WriteLine(" Parabéns!!!");
                         Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
                     }
-                    else 
-                    if (playerPosition <= 9)
+                    else if (playerPosition <= 9)
                     {
                         Console.WriteLine("/==--==--==--==--==--==--==--==\\");
                         Console.WriteLine($"   Você está na casa {playerPosition} de {endLine}!!");
