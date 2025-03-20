@@ -8,10 +8,7 @@ namespace JogoDosDados.ConsoleApp
             bool mainMenu = true;
             do
             {
-                Console.Clear();
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine("     Boas vindas ao Jogo dos Dados!");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.Headers("MENU-PRINCIPAL");
                 Console.WriteLine("1 >> Começar a Partida");
                 Console.WriteLine("2 >> Sobre o Jogo");
                 Console.WriteLine("S >> Fechar Jogo");
@@ -27,6 +24,7 @@ namespace JogoDosDados.ConsoleApp
                         break;
                     case "S":
                         mainMenu = false;
+                        Console.Clear();
                         Console.WriteLine("Adeus (T_T)/");
                         break;
                 }

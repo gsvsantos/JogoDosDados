@@ -4,23 +4,13 @@
     {
         public static int Turn(int userPosition)
         {
-            Console.WriteLine("            Turno do Usuário");
-            Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
-
-            Console.Write("Pressione [Enter] para lançar o dado...\n\n");
-            Console.ReadKey();
+            ViewUtils.Headers("TURNO-USUARIO");
+            ViewUtils.PressEnter("JOGAR-DADO");
             int userResult = DiceGame.RollDice();
             int userOldPosition = userPosition;
             userPosition += userResult;
-
-            Console.WriteLine("/==--==--==--==--==--==--==\\");
-            Console.WriteLine($"  Posição anterior: {userOldPosition}");
-            Console.WriteLine($"  O dado caiu no número: {userResult}");
-            Console.WriteLine($"  Posição atual: {userPosition}");
-            Console.WriteLine("\\==--==--==--==--==--==--==/\n");
-
+            ViewUtils.PositionStatus(userOldPosition, userResult, userPosition);
             userPosition = LuckyTest(userPosition);
-
             return userPosition;
         }
         public static int LuckyTest(int userPosition)

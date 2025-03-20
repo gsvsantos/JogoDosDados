@@ -4,21 +4,12 @@
     {
         public static int Turn(int cpuPosition)
         {
-            Console.WriteLine("              Turno da CPU");
-            Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
-
+            ViewUtils.Headers("TURNO-CPU");
             int cpuResult = DiceGame.RollDice();
             int cpuOldPosition = cpuPosition;
             cpuPosition += cpuResult;
-
-            Console.WriteLine("/==--==--==--==--==--==--==\\");
-            Console.WriteLine($"  Posição anterior: {cpuOldPosition}");
-            Console.WriteLine($"  O dado caiu no número: {cpuResult}");
-            Console.WriteLine($"  Posição atual: {cpuPosition}");
-            Console.WriteLine("\\==--==--==--==--==--==--==/\n");
-
+            ViewUtils.PositionStatus(cpuOldPosition, cpuResult, cpuPosition);
             cpuPosition = LuckyTest(cpuPosition);
-
             return cpuPosition;
         }
         public static int LuckyTest(int cpuPosition)

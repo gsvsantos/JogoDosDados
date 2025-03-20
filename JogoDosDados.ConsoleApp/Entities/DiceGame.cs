@@ -5,6 +5,7 @@
         public const int endLine = 30;
         public static void GameStart()
         {
+            bool onGoing;
             do
             {
                 int userPosition = 0;
@@ -13,39 +14,18 @@
 
                 do
                 {
-                    MainHeader();
+                    ViewUtils.Headers("JOGO-DOS-DADOS");
                     userPosition = Player.Turn(userPosition);
-
-                    Console.Write("Pressione [Enter] para ver o turno da CPU...");
-                    Console.ReadKey();
-
-                    MainHeader();
+                    ViewUtils.PressEnter("TURNO-CPU");
+                    ViewUtils.Headers("JOGO-DOS-DADOS");
                     cpuPosition = CPU.Turn(cpuPosition);
                     hasWinner = ShowResult(userPosition, cpuPosition);
                     if (hasWinner == true)
                         continue;
-
-                    Console.Write("Pressione [Enter] para ir à próxima rodada.");
-                    Console.ReadKey();
-
+                    ViewUtils.PressEnter("PROXIMA-RODADA");
                 } while (hasWinner == false);
-
-                Console.Write("Deseja jogar novamente? (S/N) ");
-                string optionContinue = Console.ReadLine()!.ToUpper();
-                if (optionContinue != "S" && optionContinue != "SIM" && optionContinue != "SI")
-                {
-                    Console.WriteLine("Adeus (T_T)/");
-                    break;
-                }
-
-            } while (true);
-        }
-        public static void MainHeader()
-        {
-            Console.Clear();
-            Console.WriteLine("/==--==--==--==--==--==--==--==--==--==\\");
-            Console.WriteLine("             Jogo dos Dados");
-            Console.WriteLine("|==--==--==--==--==--==--==--==--==--==|");
+                onGoing = ViewUtils.Continue();
+            } while (onGoing == true);
         }
         public static int RollDice()
         {
@@ -59,10 +39,8 @@
             bool cpuWin = CPU.CheckWin(cpuPosition, userPosition);
             if (playerWin == true)
             {
-                Console.Clear();
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine("                            VENCEDOR");
-                Console.WriteLine("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|");
+                ViewUtils.PressEnter("VER-RESULTADO");
+                ViewUtils.Headers("VENCEDOR");
                 Console.WriteLine($"   Você alcançou a casa {userPosition} e ultrapassou a linha de chegada!!");
                 Console.WriteLine("                          VOCÊ VENCEU!");
                 Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
@@ -70,10 +48,8 @@
             }
             else if (cpuWin == true)
             {
-                Console.Clear();
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine("                            VENCEDOR");
-                Console.WriteLine("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|");
+                ViewUtils.PressEnter("VER-RESULTADO");
+                ViewUtils.Headers("VENCEDOR");
                 Console.WriteLine($"    CPU alcançou a casa {cpuPosition} e ultrapassou a linha de chegada!");
                 Console.WriteLine("                           CPU VENCEU");
                 Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
@@ -81,10 +57,8 @@
             }
             else if (userPosition == cpuPosition && userPosition >= endLine && cpuPosition >= endLine)
             {
-                Console.Clear();
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine("                           EMPATE");
-                Console.WriteLine("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|");
+                ViewUtils.PressEnter("VER-RESULTADO");
+                ViewUtils.Headers("EMPATE");
                 Console.WriteLine($"   Você e a CPU ultrapassaram a linha de chegada juntos!!");
                 Console.WriteLine($"                         CPU:  ({cpuPosition})");
                 Console.WriteLine($"                         Você: ({userPosition})");
@@ -96,19 +70,16 @@
         }
         public static void GameAbout()
         {
-            Console.Clear();
-            Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-            Console.WriteLine("                                 > Como o Jogo Funciona <");
-            Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
+            ViewUtils.Headers("SOBRE");
             Console.WriteLine("\n1. Inicie uma nova partida no menu principal.");
             Console.WriteLine("2. O jogo começa com você e a CPU na linha de partida (0).");
             Console.WriteLine("3. Na sua vez, você deverá jogar o dado para descobrir quantas casas você vai andar.");
             Console.WriteLine("4. A CPU jogará seu próprio dado automaticamente.");
             Console.WriteLine("5. Ganhará quem passar a linha de chegada primeiro.");
             Console.WriteLine("6. Em caso de ultrapassarem a linha juntos, ganha quem estiver na maior distância.");
-            Console.WriteLine("7. Haverá empate se ambos chegarem na mesma casa superior á linha de chegada.");
+            Console.WriteLine("7. Haverá empate se ambos chegarem na mesma casa superior a linha de chegada.");
             Console.WriteLine("\nRegras Especiais.");
-            Console.WriteLine("- Casas especiais podem ajudar avançando casas extras, ou atrapalhar fazendo recuar casas.");
+            Console.WriteLine("- Casas únicas podem ajudar com avanços extras, ou atrapalhar fazendo recuar casas.");
             Console.WriteLine("- Se tirar 6 no dado, o dado irá rodar novamente.");
             Console.WriteLine("\n/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
 
