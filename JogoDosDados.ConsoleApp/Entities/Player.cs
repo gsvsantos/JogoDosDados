@@ -1,4 +1,6 @@
-﻿namespace JogoDosDados.ConsoleApp.Entities
+﻿using JogoDosDados.ConsoleApp.Entities.Utils;
+
+namespace JogoDosDados.ConsoleApp.Entities
 {
     public class Player
     {

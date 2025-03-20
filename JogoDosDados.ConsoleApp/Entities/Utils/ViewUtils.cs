@@ -1,4 +1,4 @@
-﻿namespace JogoDosDados.ConsoleApp.Entities
+﻿namespace JogoDosDados.ConsoleApp.Entities.Utils
 {
     public class ViewUtils
     {
@@ -81,7 +81,7 @@
         }
         public static bool Continue()
         {
-            ViewUtils.PaintWrite("Deseja jogar novamente? (S/N) ", ConsoleColor.Yellow);
+            PaintWrite("Deseja jogar novamente? (S/N) ", ConsoleColor.Yellow);
             string optionContinue = Console.ReadLine()!.ToUpper();
             if (optionContinue != "S" && optionContinue != "SIM" && optionContinue != "SI")
             {
