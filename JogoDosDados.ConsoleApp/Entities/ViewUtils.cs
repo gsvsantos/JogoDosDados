@@ -2,47 +2,53 @@
 {
     public class ViewUtils
     {
+        public static void PaintWrite(string message, ConsoleColor color = ConsoleColor.DarkGreen)
+        {
+            Console.ForegroundColor = color;
+            Console.Write(message);
+            Console.ResetColor();
+        }
         public static void Headers(string type)
         {
             switch (type)
             {
                 case "MENU-PRINCIPAL":
                     Console.Clear();
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==\\");
-                    Console.WriteLine("     Boas vindas ao Jogo dos Dados!");
-                    Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==\\\n");
+                    PaintWrite("     Boas vindas ao Jogo dos Dados!\n", ConsoleColor.White);
+                    PaintWrite("\\==--==--==--==--==--==--==--==--==--==/\n\n");
                     break;
                 case "JOGO-DOS-DADOS":
                     Console.Clear();
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==\\");
-                    Console.WriteLine("             Jogo dos Dados");
-                    Console.WriteLine("|==--==--==--==--==--==--==--==--==--==|");
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==\\\n");
+                    PaintWrite("             Jogo dos Dados\n", ConsoleColor.White);
+                    PaintWrite("|==--==--==--==--==--==--==--==--==--==|\n");
                     break;
                 case "TURNO-USUARIO":
-                    Console.WriteLine("            Turno do Usuário");
-                    Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
+                    PaintWrite("            Turno do Usuário\n", ConsoleColor.White);
+                    PaintWrite("\\==--==--==--==--==--==--==--==--==--==/\n\n");
                     break;
                 case "TURNO-CPU":
-                    Console.WriteLine("              Turno da CPU");
-                    Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==/\n");
+                    PaintWrite("              Turno da CPU\n", ConsoleColor.White);
+                    PaintWrite("\\==--==--==--==--==--==--==--==--==--==/\n\n");
                     break;
                 case "VENCEDOR":
                     Console.Clear();
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                    Console.WriteLine("                            VENCEDOR");
-                    Console.WriteLine("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|");
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n");
+                    PaintWrite("                            VENCEDOR\n", ConsoleColor.White);
+                    PaintWrite("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|\n");
                     break;
                 case "EMPATE":
                     Console.Clear();
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                    Console.WriteLine("                           EMPATE");
-                    Console.WriteLine("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|");
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n");
+                    PaintWrite("                           EMPATE\n", ConsoleColor.White);
+                    PaintWrite("|==--==--==--==--==--==--==--==--==--==--==--==--==--==--==|\n");
                     break;
                 case "SOBRE":
                     Console.Clear();
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
-                    Console.WriteLine("                                 > Como o Jogo Funciona <");
-                    Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n");
+                    PaintWrite("                                 > Como o Jogo Funciona <\n", ConsoleColor.White);
+                    PaintWrite("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n");
                     break;
 
             }
@@ -52,26 +58,30 @@
             switch (type)
             {
                 case "JOGAR-DADO":
-                    Console.Write("Pressione [Enter] para lançar o dado.\n\n");
+                    PaintWrite("Pressione [Enter] para lançar o dado.\n\n", ConsoleColor.White);
                     Console.ReadKey();
                     break;
                 case "TURNO-CPU":
-                    Console.Write("Pressione [Enter] para ver o turno da CPU.");
+                    PaintWrite("Pressione [Enter] para ver o turno da CPU.", ConsoleColor.White);
                     Console.ReadKey();
                     break;
                 case "PROXIMA-RODADA":
-                    Console.Write("Pressione [Enter] para ir à próxima rodada.");
+                    PaintWrite("Pressione [Enter] para ir à próxima rodada.", ConsoleColor.White);
                     Console.ReadKey();
                     break;
                 case "VER-RESULTADO":
-                    Console.Write("Pressione [Enter] para ver o resultado.");
+                    PaintWrite("Pressione [Enter] para ver o resultado.", ConsoleColor.White);
+                    Console.ReadKey();
+                    break;
+                case "VOLTAR-MENU":
+                    PaintWrite("Pressione [Enter] para voltar ao menu principal.", ConsoleColor.White);
                     Console.ReadKey();
                     break;
             }
         }
         public static bool Continue()
         {
-            Console.Write("Deseja jogar novamente? (S/N) ");
+            ViewUtils.PaintWrite("Deseja jogar novamente? (S/N) ", ConsoleColor.Yellow);
             string optionContinue = Console.ReadLine()!.ToUpper();
             if (optionContinue != "S" && optionContinue != "SIM" && optionContinue != "SI")
             {
@@ -81,11 +91,11 @@
         }
         public static void PositionStatus(int oldPosition, int result, int position)
         {
-            Console.WriteLine("/==--==--==--==--==--==--==\\");
-            Console.WriteLine($"  Posição anterior: {oldPosition}");
-            Console.WriteLine($"  O dado caiu no número: {result}");
-            Console.WriteLine($"  Posição atual: {position}");
-            Console.WriteLine("\\==--==--==--==--==--==--==/\n");
+            PaintWrite("/==--==--==--==--==--==--==\\\n");
+            PaintWrite($"  Posição anterior: {oldPosition}\n", ConsoleColor.White);
+            PaintWrite($"  O dado caiu no número: {result}\n", ConsoleColor.White);
+            PaintWrite($"  Posição atual: {position}\n", ConsoleColor.White);
+            PaintWrite("\\==--==--==--==--==--==--==/\n\n");
         }
     }
 }

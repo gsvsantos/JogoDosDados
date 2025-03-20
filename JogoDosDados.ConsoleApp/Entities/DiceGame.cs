@@ -41,28 +41,28 @@
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("VENCEDOR");
-                Console.WriteLine($"   Você alcançou a casa {userPosition} e ultrapassou a linha de chegada!!");
-                Console.WriteLine("                          VOCÊ VENCEU!");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite($"   Você alcançou a casa {userPosition} e ultrapassou a linha de chegada!!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("                          VOCÊ VENCEU!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
             }
             else if (cpuWin == true)
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("VENCEDOR");
-                Console.WriteLine($"    CPU alcançou a casa {cpuPosition} e ultrapassou a linha de chegada!");
-                Console.WriteLine("                           CPU VENCEU");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite($"    CPU alcançou a casa {cpuPosition} e ultrapassou a linha de chegada!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("                           CPU VENCEU\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
             }
             else if (userPosition == cpuPosition && userPosition >= endLine && cpuPosition >= endLine)
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("EMPATE");
-                Console.WriteLine($"   Você e a CPU ultrapassaram a linha de chegada juntos!!");
-                Console.WriteLine($"                         CPU:  ({cpuPosition})");
-                Console.WriteLine($"                         Você: ({userPosition})");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite($"   Você e a CPU ultrapassaram a linha de chegada juntos!!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"                         CPU:  ({cpuPosition})\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"                         Você: ({userPosition})\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
             }
             else
@@ -71,20 +71,19 @@
         public static void GameAbout()
         {
             ViewUtils.Headers("SOBRE");
-            Console.WriteLine("\n1. Inicie uma nova partida no menu principal.");
-            Console.WriteLine("2. O jogo começa com você e a CPU na linha de partida (0).");
-            Console.WriteLine("3. Na sua vez, você deverá jogar o dado para descobrir quantas casas você vai andar.");
-            Console.WriteLine("4. A CPU jogará seu próprio dado automaticamente.");
-            Console.WriteLine("5. Ganhará quem passar a linha de chegada primeiro.");
-            Console.WriteLine("6. Em caso de ultrapassarem a linha juntos, ganha quem estiver na maior distância.");
-            Console.WriteLine("7. Haverá empate se ambos chegarem na mesma casa superior a linha de chegada.");
-            Console.WriteLine("\nRegras Especiais.");
-            Console.WriteLine("- Casas únicas podem ajudar com avanços extras, ou atrapalhar fazendo recuar casas.");
-            Console.WriteLine("- Se tirar 6 no dado, o dado irá rodar novamente.");
-            Console.WriteLine("\n/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\");
+            ViewUtils.PaintWrite("\n1. Inicie uma nova partida no menu principal.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("2. O jogo começa com você e a CPU na linha de partida (0).\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("3. Na sua vez, você deverá jogar o dado para descobrir quantas casas você vai andar.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("4. A CPU jogará seu próprio dado automaticamente.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("5. Ganhará quem passar a linha de chegada primeiro.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("6. Em caso de ultrapassarem a linha juntos, ganha quem estiver na maior distância.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("7. Haverá empate se ambos chegarem na mesma casa superior a linha de chegada.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("\nRegras Especiais.\n", ConsoleColor.Red);
+            ViewUtils.PaintWrite("- Casas únicas podem ajudar com avanços extras, ou atrapalhar fazendo recuar casas.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("- Se tirar 6 no dado, o dado irá rodar novamente.\n", ConsoleColor.Yellow);
+            ViewUtils.PaintWrite("\n/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n\n");
 
-            Console.Write("\nPressione [Enter] para voltar ao menu.");
-            Console.ReadKey();
+            ViewUtils.PressEnter("VOLTAR-MENU");
         }
 
     }

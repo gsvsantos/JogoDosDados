@@ -17,33 +17,36 @@
         {
             if (userPosition == 6)
             {
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine($"     Sorte grande!! Ganho uma rodada extra!");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Sorte Grande!!\n", ConsoleColor.Green);
+                ViewUtils.PaintWrite($"  Ganhou uma rodada extra!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==/\n\n");
 
                 int userResult = DiceGame.RollDice();
                 userPosition += userResult;
 
-                Console.WriteLine("/==--==--==--==--==--==--==\\");
-                Console.WriteLine($"  O dado caiu no número: {userResult}");
-                Console.WriteLine($"  Posição atual: {userPosition}");
-                Console.WriteLine("\\==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  O dado caiu no número: {userResult}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {userPosition}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==/\n\n");
             }
             if (userPosition == 5 || userPosition == 11 || userPosition == 15 || userPosition == 25)
             {
-                Console.WriteLine("/==--==--==--==--==--==--==--==--==\\");
-                Console.WriteLine($"  Você caiu na casa de sorte {userPosition}!!");
-                Console.WriteLine("  Avanço extra de 3 casas!");
-                Console.WriteLine($"  Posição atual: {userPosition += 3}");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Casa Sorteada!!\n", ConsoleColor.Green);
+                ViewUtils.PaintWrite($"  Você caiu na casa {userPosition} e ganhou..\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("  Avanço extra de 3 casas!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {userPosition += 3}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==/\n\n");
             }
             else if (userPosition == 7 || userPosition == 13 || userPosition == 20)
             {
-                Console.WriteLine("/==--==--==--==--==--==--==--==\\");
-                Console.WriteLine($"  Que azar! Caiu na casa {userPosition}..");
-                Console.WriteLine("  Recuo de 2 casas!!");
-                Console.WriteLine($"  Posição atual: {userPosition -= 2}");
-                Console.WriteLine("\\==--==--==--==--==--==--==--==/\n");
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Que Azar =/\n", ConsoleColor.Red);
+                ViewUtils.PaintWrite($"  Caiu na casa {userPosition}..\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("  Recuo de 2 casas!!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {userPosition -= 2}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==/\n\n");
             }
             return userPosition;
         }
