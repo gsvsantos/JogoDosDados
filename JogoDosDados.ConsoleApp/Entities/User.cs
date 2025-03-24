@@ -2,11 +2,11 @@
 
 namespace JogoDosDados.ConsoleApp.Entities
 {
-    public class CPU : Entity
+    public class User : Entity
     {
         public override void Turn()
         {
-            ViewUtils.Headers("TURNO-CPU");
+            ViewUtils.Headers("TURNO-USUARIO");
             base.Turn();
         }
     }
