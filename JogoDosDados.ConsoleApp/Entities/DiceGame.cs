@@ -1,49 +1,106 @@
-﻿using JogoDosDados.ConsoleApp.Entities.Utils;
+﻿using System.Numerics;
+using JogoDosDados.ConsoleApp.Entities.Utils;
 
 namespace JogoDosDados.ConsoleApp.Entities
 {
     public class DiceGame
     {
+        public static User user = new User();
+        public static CPU cpu = new CPU();
         public const int endLine = 30;
+
         public static void GameStart()
         {
             bool onGoing;
+
             do
             {
-                int userPosition = 0;
-                int cpuPosition = 0;
                 bool hasWinner;
 
                 do
                 {
                     ViewUtils.Headers("JOGO-DOS-DADOS");
-                    userPosition = Player.Turn(userPosition);
+                    user.Turn();
+
                     ViewUtils.PressEnter("TURNO-CPU");
+
                     ViewUtils.Headers("JOGO-DOS-DADOS");
-                    cpuPosition = CPU.Turn(cpuPosition);
-                    hasWinner = ShowResult(userPosition, cpuPosition);
+                    cpu.Turn();
+
+                    hasWinner = ShowResult();
                     if (hasWinner == true)
                         continue;
+
                     ViewUtils.PressEnter("PROXIMA-RODADA");
                 } while (hasWinner == false);
+
+                user.actualPosition = 0;
+                cpu.actualPosition = 0;
+
                 onGoing = ViewUtils.Continue();
             } while (onGoing == true);
         }
-        public static int RollDice()
+        public static int LuckyTest(int actualPosition, int rollResult)
         {
-            Random numberGenerator = new Random();
-            int result = numberGenerator.Next(1, 7);
-            return result;
+            int rollExtra = 6;
+            int[] luckySpaces = [5, 11, 15, 25];
+            int[] unluckySpaces = [7, 13, 20];
+
+            if (actualPosition == rollExtra)
+            {
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Sorte Grande!!\n", ConsoleColor.Green);
+                ViewUtils.PaintWrite($"  Ganhou uma rodada extra!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==/\n\n");
+
+                actualPosition += rollResult;
+
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  O dado caiu no número: {rollResult}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {actualPosition}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==/\n\n");
+            }
+
+            if (luckySpaces.Contains(actualPosition))
+            {
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Casa Sorteada!!\n", ConsoleColor.Green);
+                ViewUtils.PaintWrite($"  Você caiu na casa {actualPosition} e ganhou..\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("  Avanço extra de 3 casas!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {actualPosition += 3}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==/\n\n");
+            }
+            else if (unluckySpaces.Contains(actualPosition))
+            {
+                ViewUtils.PaintWrite("/==--==--==--==--==--==--==--==\\\n");
+                ViewUtils.PaintWrite($"  Que Azar =/\n", ConsoleColor.Red);
+                ViewUtils.PaintWrite($"  Caiu na casa {actualPosition}..\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("  Recuo de 2 casas!!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"  Posição atual: {actualPosition -= 2}\n", ConsoleColor.White);
+                ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==/\n\n");
+            }
+
+            return actualPosition;
         }
-        public static bool ShowResult(int userPosition, int cpuPosition)
+        public static bool CheckWin(bool checkPlayerWin, bool checkCPUWin)
         {
-            bool playerWin = Player.CheckWin(userPosition, cpuPosition);
-            bool cpuWin = CPU.CheckWin(cpuPosition, userPosition);
+            if (checkPlayerWin && user.actualPosition >= DiceGame.endLine && user.actualPosition > cpu.actualPosition)
+                return true;
+            if (checkCPUWin && cpu.actualPosition >= DiceGame.endLine && cpu.actualPosition > user.actualPosition)
+                return true;
+            else
+                return false;
+        }
+        public static bool ShowResult()
+        {
+            bool playerWin = CheckWin(true, false);
+            bool cpuWin = CheckWin(false, true);
+
             if (playerWin == true)
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("VENCEDOR");
-                ViewUtils.PaintWrite($"   Você alcançou a casa {userPosition} e ultrapassou a linha de chegada!!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"   Você alcançou a casa {user.actualPosition} e ultrapassou a linha de chegada!!\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("                          VOCÊ VENCEU!\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
@@ -52,18 +109,18 @@ namespace JogoDosDados.ConsoleApp.Entities
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("VENCEDOR");
-                ViewUtils.PaintWrite($"    CPU alcançou a casa {cpuPosition} e ultrapassou a linha de chegada!\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"    CPU alcançou a casa {cpu.actualPosition} e ultrapassou a linha de chegada!\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("                           CPU VENCEU\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
             }
-            else if (userPosition == cpuPosition && userPosition >= endLine && cpuPosition >= endLine)
+            else if (user.actualPosition == cpu.actualPosition && user.actualPosition >= endLine && cpu.actualPosition >= endLine)
             {
                 ViewUtils.PressEnter("VER-RESULTADO");
                 ViewUtils.Headers("EMPATE");
                 ViewUtils.PaintWrite($"   Você e a CPU ultrapassaram a linha de chegada juntos!!\n", ConsoleColor.White);
-                ViewUtils.PaintWrite($"                         CPU:  ({cpuPosition})\n", ConsoleColor.White);
-                ViewUtils.PaintWrite($"                         Você: ({userPosition})\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"                         CPU:  ({cpu.actualPosition})\n", ConsoleColor.White);
+                ViewUtils.PaintWrite($"                         Você: ({user.actualPosition})\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("\\==--==--==--==--==--==--==--==--==--==--==--==--==--==--==/\n\n");
                 return true;
             }

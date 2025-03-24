@@ -50,7 +50,6 @@
                     PaintWrite("                                 > Como o Jogo Funciona <\n", ConsoleColor.White);
                     PaintWrite("/==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==--==\\\n");
                     break;
-
             }
         }
         public static void PressEnter(string type)

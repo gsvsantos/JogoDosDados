@@ -13,6 +13,7 @@ namespace JogoDosDados.ConsoleApp
                 ViewUtils.PaintWrite("1 >> Começar a Partida\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("2 >> Sobre o Jogo\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("S >> Fechar Jogo\n", ConsoleColor.White);
+
                 ViewUtils.PaintWrite("\nOpção: ", ConsoleColor.White);
                 string option = Console.ReadLine()!.ToUpper();
                 switch (option)
