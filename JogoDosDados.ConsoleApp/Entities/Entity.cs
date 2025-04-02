@@ -19,9 +19,9 @@ namespace JogoDosDados.ConsoleApp.Entities
             oldPosition = actualPosition;
             actualPosition += rollResult;
 
-            ViewUtils.PositionStatus(oldPosition, rollResult, actualPosition);
+            ViewWrite.PositionStatus(oldPosition, rollResult, actualPosition);
 
-            actualPosition = DiceGame.LuckyTest(actualPosition, rollResult);
+            actualPosition = DiceGame.LuckyTest(oldPosition, rollResult, actualPosition);
         }
     }
 }
