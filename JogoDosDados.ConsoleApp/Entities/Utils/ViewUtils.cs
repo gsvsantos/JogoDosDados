@@ -88,13 +88,6 @@
             }
             return true;
         }
-        public static void PositionStatus(int oldPosition, int result, int position)
-        {
-            PaintWrite("/==--==--==--==--==--==--==\\\n");
-            PaintWrite($"  Posição anterior: {oldPosition}\n", ConsoleColor.White);
-            PaintWrite($"  O dado caiu no número: {result}\n", ConsoleColor.White);
-            PaintWrite($"  Posição atual: {position}\n", ConsoleColor.White);
-            PaintWrite("\\==--==--==--==--==--==--==/\n\n");
-        }
+
     }
 }
