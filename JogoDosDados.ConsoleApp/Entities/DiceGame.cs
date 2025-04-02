@@ -45,25 +45,32 @@ namespace JogoDosDados.ConsoleApp.Entities
             int rollExtra = 6;
             int[] luckySpaces = [5, 11, 15, 25];
             int[] unluckySpaces = [7, 13, 20];
-
-            if (rollResult == rollExtra)
+            do
             {
-                ViewWrite.ExtraRollText();
+                if (rollResult == rollExtra)
+                {
+                    ViewWrite.ExtraRollText();
 
-                rollResult += Entity.RollDice();
-                actualPosition += rollResult;
+                    oldPosition = actualPosition;
+                    rollResult = Entity.RollDice();
+                    actualPosition += rollResult;
 
-                ViewWrite.PositionStatus(oldPosition, rollResult, actualPosition);
-            }
+                    ViewWrite.PositionStatus(oldPosition, rollResult, actualPosition);
+                    continue;
+                }
 
-            if (luckySpaces.Contains(actualPosition))
-            {
-                ViewWrite.LuckyHouseText(actualPosition);
-            }
-            else if (unluckySpaces.Contains(actualPosition))
-            {
-                ViewWrite.UnluckyHouseText(actualPosition);
-            }
+                if (luckySpaces.Contains(actualPosition))
+                {
+                    ViewWrite.LuckyHouseText(actualPosition);
+                    actualPosition += 3;
+                }
+                else if (unluckySpaces.Contains(actualPosition))
+                {
+                    ViewWrite.UnluckyHouseText(actualPosition);
+                    actualPosition -= 2;
+                }
+                break;
+            } while (true);
 
             return actualPosition;
         }
