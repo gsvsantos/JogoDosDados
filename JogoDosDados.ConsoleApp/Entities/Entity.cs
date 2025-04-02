@@ -9,7 +9,7 @@ namespace JogoDosDados.ConsoleApp.Entities
         public int oldPosition = 0;
         public int rollResult = 0;
 
-        public virtual int RollDice()
+        public static int RollDice()
         {
             return numberGenerator.Next(1, 7);
         }
