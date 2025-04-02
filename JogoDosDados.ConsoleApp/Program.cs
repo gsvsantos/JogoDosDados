@@ -10,11 +10,7 @@ namespace JogoDosDados.ConsoleApp
             do
             {
                 ViewUtils.Headers("MENU-PRINCIPAL");
-                ViewUtils.PaintWrite("1 >> Começar a Partida\n", ConsoleColor.White);
-                ViewUtils.PaintWrite("2 >> Sobre o Jogo\n", ConsoleColor.White);
-                ViewUtils.PaintWrite("S >> Fechar Jogo\n", ConsoleColor.White);
-
-                ViewUtils.PaintWrite("\nOpção: ", ConsoleColor.White);
+                ViewWrite.MainMenuOptions();
                 string option = Console.ReadLine()!.ToUpper();
                 switch (option)
                 {
@@ -27,7 +23,7 @@ namespace JogoDosDados.ConsoleApp
                     case "S":
                         mainMenu = false;
                         Console.Clear();
-                        ViewUtils.PaintWrite("Adeus (T_T)/\n", ConsoleColor.Red);
+                        ViewWrite.GoodbyeText();
                         break;
                 }
             } while (mainMenu);

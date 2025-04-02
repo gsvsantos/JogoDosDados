@@ -9,7 +9,7 @@ namespace JogoDosDados.ConsoleApp.Entities
         public int oldPosition = 0;
         public int rollResult = 0;
 
-        public virtual int RollDice()
+        public static int RollDice()
         {
             return numberGenerator.Next(1, 7);
         }
@@ -19,9 +19,9 @@ namespace JogoDosDados.ConsoleApp.Entities
             oldPosition = actualPosition;
             actualPosition += rollResult;
 
-            ViewUtils.PositionStatus(oldPosition, rollResult, actualPosition);
+            ViewWrite.PositionStatus(oldPosition, rollResult, actualPosition);
 
-            actualPosition = DiceGame.LuckyTest(actualPosition, rollResult);
+            actualPosition = DiceGame.LuckyTest(oldPosition, rollResult, actualPosition);
         }
     }
 }
