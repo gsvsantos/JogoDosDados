@@ -46,13 +46,14 @@ namespace JogoDosDados.ConsoleApp.Entities
             int[] luckySpaces = [5, 11, 15, 25];
             int[] unluckySpaces = [7, 13, 20];
 
-            if (actualPosition == rollExtra)
+            if (rollResult == rollExtra)
             {
                 ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
                 ViewUtils.PaintWrite($"  Sorte Grande!!\n", ConsoleColor.Green);
                 ViewUtils.PaintWrite($"  Ganhou uma rodada extra!\n", ConsoleColor.White);
                 ViewUtils.PaintWrite("\\==--==--==--==--==--==--==/\n\n");
 
+                rollResult += Entity.RollDice();
                 actualPosition += rollResult;
 
                 ViewUtils.PaintWrite("/==--==--==--==--==--==--==\\\n");
